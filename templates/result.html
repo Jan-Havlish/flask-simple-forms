@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Results</title>
+</head>
+
+<body>
+    {% for one_result in output_list %}
+    <br>
+    <p>{{ one_result }}</p>
+    {% for key in one_result %}
+    <p>
+    <h1>{{ one_result[key] }}</h1>
+    </p>
+    {% endfor %}
+    {% endfor %}
+</body>
+
+</html>
