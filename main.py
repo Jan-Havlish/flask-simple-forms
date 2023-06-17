@@ -13,9 +13,6 @@ def convert_multi_dict_to_dict(multi_dict):
 
 db_handler = PickleDBHandler("db.db")
 
-# do db "Capital of France" : {"Paris" : 1, "Lyon" : 2, "Marseille" : 3}
-
-# print(sum_values_of_2_dicts({"Paris" : 1, "Lyon" : 2, "Marseille" : 3}, {"Paris" : 1, "Lyon" : 2, "Marseille" : 3}))
 
 questions_and_choices_dictionary = [
     {
@@ -56,8 +53,6 @@ def get_template_array(questions_and_choices_dictionary):
     ]
 
 
-# print(make_empty_db(questions_and_choices_dictionary))
-
 app = flask.Flask(__name__, template_folder="templates")
 
 
@@ -72,7 +67,7 @@ def home():
 
 @app.route("/process_form", methods=["POST"])
 def process_form():
-    form_data = flask.request.form  # Získání dat z formuláře
+    form_data = flask.request.form  # get form
 
     to_store = convert_multi_dict_to_dict(form_data)
     template_array = get_template_array(questions_and_choices_dictionary)
@@ -89,7 +84,7 @@ def process_form():
         for key, value in item.items():
             db_handler.add_2_dicts_in_db(key, value)
 
-    return "Data byla úspěšně zpracována!"
+    return "Thank you for filling this form."
 
 
 @app.route("/results")
