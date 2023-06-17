@@ -6,7 +6,7 @@ from db_handler import PickleDBHandler
 from functions import convert_multi_dict_to_dict, make_empty_db, get_template_array
 from __init__ import db_handler, app, questions_and_choices_dictionary
 
-#make_empty_db(questions_and_choices_dictionary)
+#make_empty_db(questions_and_choices_dictionary) # nessery for each first run or change of questions (questions_and_choices.json)
 
 @app.route("/")
 @app.route("/home")

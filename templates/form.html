@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="{{ url_for('static', filename='form_script.js') }}"></script>
+
 </head>
 
 <body>
@@ -21,33 +23,6 @@
     {% endfor %}
     <input type="submit" value="Submit">
   </form>
-
-  <script>
-    function validateForm() {
-      // Získání všech prvků formuláře
-      var form = document.getElementById("myForm");
-      var inputs = form.getElementsByTagName("input");
-
-      // Kontrola, zda bylo vybráno alespoň jedno pole u každé otázky
-      for (var i = 0; i < inputs.length; i++) {
-        var input = inputs[i];
-        if (input.type === "radio" || input.type === "checkbox") {
-          var question = input.name;
-          var questionInputs = form.querySelectorAll('input[name="' + question + '"]');
-          var checkedInputs = Array.prototype.slice.call(questionInputs).filter(function (input) {
-            return input.checked;
-          });
-
-          if (checkedInputs.length === 0) {
-            alert("Vyberte prosím odpověď na všechny otázky.");
-            return false;
-          }
-        }
-      }
-
-      return true;
-    }
-  </script>
 
 </body>
 
