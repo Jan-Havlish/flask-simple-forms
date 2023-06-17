@@ -8,15 +8,23 @@
 </head>
 
 <body>
-    {% for one_result in output_list %}
-    <br>
-    <p>{{ one_result }}</p>
-    {% for key in one_result %}
-    <p>
-    <h1>{{ one_result[key] }}</h1>
-    </p>
-    {% endfor %}
-    {% endfor %}
+    <ul>
+
+
+        {% for one_result in output_list %}
+        <li>
+
+            {{ one_result["question"] }} : <ul>
+                {% for key in one_result["list_of_choices"] %}
+                <li>
+                    {{ key }} : {{ one_result["list_of_choices"][key] }}
+                </li>
+                <br>
+
+                {% endfor %}
+            </ul>
+            {% endfor %}
+    </ul>
 </body>
 
 </html>

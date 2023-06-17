@@ -1,60 +1,12 @@
-import flask, time
+import flask
+import time
+import json
 from werkzeug.datastructures import ImmutableMultiDict
 from db_handler import PickleDBHandler
+from functions import convert_multi_dict_to_dict, make_empty_db, get_template_array
+from __init__ import db_handler, app, questions_and_choices_dictionary
 
-
-def convert_multi_dict_to_dict(multi_dict):
-    data = multi_dict
-    result = {}
-    for key in data.keys():
-        result[key] = data.getlist(key)
-    return result
-
-
-db_handler = PickleDBHandler("db.db")
-
-
-questions_and_choices_dictionary = [
-    {
-        "question": "Capital of France",
-        "list_of_choices": [
-            "Paris",
-            "Lyon",
-            "Marseille",
-        ],
-        "button_type": "radio",
-    },
-    {
-        "question": "Capital of Germany",
-        "list_of_choices": [
-            "Berlin",
-            "Hamburg",
-            "Stuttgart",
-        ],
-        "button_type": "checkbox",
-    },
-]
-
-
-def make_empty_db(questions_and_choices_dictionary):
-    for question_dict in questions_and_choices_dictionary:
-        dict_of_choices = {choice: 0 for choice in question_dict["list_of_choices"]}
-        db_handler.set(question_dict["question"], dict_of_choices)
-
-
-def get_template_array(questions_and_choices_dictionary):
-    return [
-        {
-            question_dict["question"]: {
-                choice: 0 for choice in question_dict["list_of_choices"]
-            }
-        }
-        for question_dict in questions_and_choices_dictionary
-    ]
-
-
-app = flask.Flask(__name__, template_folder="templates")
-
+#make_empty_db(questions_and_choices_dictionary)
 
 @app.route("/")
 @app.route("/home")
@@ -90,17 +42,11 @@ def process_form():
 @app.route("/results")
 def results():
     results_list = db_handler.get_all()
-    print(results_list)
     output_list = []
     for result in results_list:
         output_list.append(
             {"question": result, "list_of_choices": db_handler.get(result)}
         )
-        print()
-        print(result)
-        print(db_handler.get(result))
-
-    print(output_list)
 
     return flask.render_template("result.html", output_list=output_list)
 
