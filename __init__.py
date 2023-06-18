@@ -8,4 +8,3 @@ with open("questions_and_choices.json", "r", encoding="utf-8") as f:
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
 db_handler = PickleDBHandler("db.db")
-

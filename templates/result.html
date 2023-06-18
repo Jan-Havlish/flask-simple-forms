@@ -8,13 +8,14 @@
 </head>
 
 <body>
+    <h1>Results of form</h1> <br>
     <ul>
-
 
         {% for one_result in output_list %}
         <li>
-
-            {{ one_result["question"] }} : <ul>
+            <p>
+            <h2> {{ one_result["question"] }} : </h2>
+            <ul>
                 {% for key in one_result["list_of_choices"] %}
                 <li>
                     {{ key }} : {{ one_result["list_of_choices"][key] }}
@@ -22,6 +23,7 @@
                 <br>
 
                 {% endfor %}
+                </p>
             </ul>
             {% endfor %}
     </ul>
